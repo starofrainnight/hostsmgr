@@ -1,6 +1,6 @@
-========
-hostsmgr
-========
+============================
+hostsmgr (Hosts Manager)
+============================
 
 
 .. image:: https://img.shields.io/pypi/v/hostsmgr.svg
