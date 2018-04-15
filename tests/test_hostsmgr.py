@@ -24,7 +24,7 @@ def test_clear(mgr):
     """Test if clear function works
     """
 
-    mgr.load(io.StringIO("  # Test sample\n127.0.0.1 localhost\n"))
+    mgr.loads("  # Test sample\n127.0.0.1 localhost\n")
     assert len(mgr._entries) == 2
 
     mgr.clear()
