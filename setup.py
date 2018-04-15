@@ -8,16 +8,18 @@ from setuptools import setup, find_packages
 with open('README.rst') as readme_file, open('HISTORY.rst') as history_file:
     long_description = (readme_file.read() + "\n\n" + history_file.read())
 
-requirements = [
+install_requires = [
     # TODO: put package requirements here
+
 ]
 
-setup_requirements = [
+setup_requires = [
     'pytest-runner',
-    # TODO(starofrainnight): put setup requirements (distutils extensions, etc.) here
+    # TODO(starofrainnight): put setup requirements (distutils extensions,
+    # etc.) here
 ]
 
-test_requirements = [
+test_requires = [
     'pytest',
     # TODO: put package test requirements here
 ]
@@ -32,7 +34,7 @@ setup(
     url='https://github.com/starofrainnight/hostsmgr',
     packages=find_packages(),
     include_package_data=True,
-    install_requires=requirements,
+    install_requires=install_requires,
     license="Apache Software License",
     zip_safe=False,
     keywords='hostsmgr',
@@ -46,6 +48,6 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     test_suite='tests',
-    tests_require=test_requirements,
-    setup_requires=setup_requirements,
+    tests_require=test_requires,
+    setup_requires=setup_requires,
 )
