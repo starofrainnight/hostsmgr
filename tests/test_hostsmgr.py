@@ -3,23 +3,83 @@
 
 """Tests for `hostsmgr` package."""
 
+import io
 import pytest
 
-
-from hostsmgr import hostsmgr
+from hostsmgr import HostsMgr
+from hostsmgr.hostsmgr import guess_hosts_path
+from hostsmgr.entry import *
 
 
 @pytest.fixture
-def response():
-    """Sample pytest fixture.
-
-    See more at: http://doc.pytest.org/en/latest/fixture.html
+def mgr():
+    """Default hosts manager fixture
     """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
+
+    amgr = HostsMgr()
+    return amgr
 
 
-def test_content(response):
-    """Sample pytest test function with the pytest fixture as an argument."""
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
+def test_clear(mgr):
+    """Test if clear function works
+    """
+
+    mgr.load(io.StringIO("  # Test sample\n127.0.0.1 localhost\n"))
+    assert len(mgr._entries) == 2
+
+    mgr.clear()
+    assert len(mgr._entries) == 0
+
+
+def test_guess_hosts_path():
+    guess_hosts_path()
+
+
+def test_load_entries_from_string(mgr):
+
+    mgr.load(io.StringIO(""))
+    assert len(mgr._entries) == 0
+
+    mgr.load(io.StringIO("127.0.0.1 localhost"))
+    assert (len(mgr._entries) == 1) and (
+        isinstance(mgr._entries[0], HostEntry))
+
+    mgr.load(io.StringIO("127.0.0.1 localhost\n"))
+    assert (len(mgr._entries) == 1) and (
+        isinstance(mgr._entries[0], HostEntry))
+
+    mgr.load(io.StringIO("127.0.0.1"))
+    assert (len(mgr._entries) == 1) and (isinstance(mgr._entries[0], RawEntry))
+
+    mgr.load(io.StringIO("#"))
+    assert (len(mgr._entries) == 1) and (
+        isinstance(mgr._entries[0], CommentEntry))
+
+    mgr.load(io.StringIO("# "))
+    assert (len(mgr._entries) == 1) and (
+        isinstance(mgr._entries[0], CommentEntry))
+
+    mgr.load(io.StringIO(" # "))
+    assert (len(mgr._entries) == 1) and (
+        isinstance(mgr._entries[0], CommentEntry))
+
+    mgr.load(io.StringIO("    # "))
+    assert (len(mgr._entries) == 1) and (
+        isinstance(mgr._entries[0], CommentEntry))
+
+    mgr.load(io.StringIO(" # \n\n"))
+    assert (len(mgr._entries) == 2) and (
+        isinstance(mgr._entries[0], CommentEntry))
+
+    mgr.load(io.StringIO(" # hello!\n\n#kknd"))
+    assert (len(mgr._entries) == 3) and (
+        isinstance(mgr._entries[0], CommentEntry)) and (
+        isinstance(mgr._entries[2], CommentEntry))
+
+
+def test_save_entries_to_string(mgr):
+    src_hosts = "127.0.0.1     abc.com"
+    mgr.loads(src_hosts)
+    dst_hosts = mgr.saves()
+    required_hosts = '127.0.0.1\tabc.com'
+    assert dst_hosts == required_hosts

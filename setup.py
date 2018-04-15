@@ -10,6 +10,7 @@ with open('README.rst') as readme_file, open('HISTORY.rst') as history_file:
 
 install_requires = [
     # TODO: put package requirements here
+    'six',
 
 ]
 
