@@ -6,7 +6,7 @@
 import io
 import pytest
 import os.path
-
+import tempfile
 from hostsmgr import HostsMgr
 from hostsmgr.hostsmgr import guess_hosts_path
 from hostsmgr.entry import *
@@ -86,6 +86,14 @@ def test_save_entries_to_string(mgr):
     assert dst_hosts == required_hosts
 
 
-def test_read_from_file(mgr):
+def test_access_through_file(mgr):
     path = os.path.join(os.path.dirname(__file__), 'data/hosts.txt')
     mgr.load(path)
+
+    # Save as string
+    mgr.saves()
+
+    # Save to temp file
+    afile = tempfile.TemporaryFile(mode='w')
+    with afile:
+        mgr.save(afile)
