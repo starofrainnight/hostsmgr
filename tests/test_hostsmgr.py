@@ -10,6 +10,7 @@ import tempfile
 from hostsmgr import HostsMgr
 from hostsmgr.hostsmgr import guess_hosts_path
 from hostsmgr.entry import *
+from hostsmgr.conditions import *
 
 
 @pytest.fixture
@@ -97,3 +98,25 @@ def test_access_through_file(mgr):
     afile = tempfile.TemporaryFile(mode='w')
     with afile:
         mgr.save(afile)
+
+    assert mgr.check(IPAddress('127.0.0.1'))
+    assert mgr.check(IPAddress('127.0.1.1'))
+    assert mgr.check(IPAddress('::1'))
+    assert mgr.check(IPAddress('fe00::0'))
+    assert mgr.check(IPAddress('ff00::0'))
+    assert mgr.check(IPAddress('ff02::1'))
+    assert mgr.check(IPAddress('ff02::2'))
+    assert mgr.check(Host('localhost'))
+    assert mgr.check(Host('myhostname'))
+    assert mgr.check(Host('ip6-localhost'))
+    assert mgr.check(Host('ip6-loopback'))
+    assert mgr.check(Host('ip6-localnet'))
+    assert mgr.check(Host('ip6-mcastprefix'))
+    assert mgr.check(Host('ip6-allnodes'))
+    assert mgr.check(Host('ip6-allrouters'))
+    assert mgr.check(IPAddress('127.0.0.1') & Host('localhost'))
+    assert mgr.check(IPAddress('127.0.1.1') & Host('myhostname'))
+    assert not mgr.check(IPAddress('127.0.0.1') & Host(
+        'localhost') & Host('myhostname'))
+    assert not mgr.check(IPAddress('127.0.0.1') & Host(
+        'localhost') & Host('ip6-localhost'))
