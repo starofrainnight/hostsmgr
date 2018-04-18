@@ -9,6 +9,9 @@ hostsmgr (Hosts Manager)
 .. image:: https://img.shields.io/travis/starofrainnight/hostsmgr.svg
         :target: https://travis-ci.org/starofrainnight/hostsmgr
 
+.. image:: https://ci.appveyor.com/api/projects/status/lx6dwcisa6bolsqw?svg=true
+        :target: https://ci.appveyor.com/project/starofrainnight/hostsmgr
+
 .. image:: https://readthedocs.org/projects/hostsmgr/badge/?version=latest
         :target: https://hostsmgr.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
