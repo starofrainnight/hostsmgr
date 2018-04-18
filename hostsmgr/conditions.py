@@ -25,7 +25,7 @@ class Condition(object):
 
     def __bool__(self):
         raise NotImplementedError(
-            "Not supported logical operators just like 'and', 'or' or 'not'!"
+            "Unsupported logical operators just like 'and', 'or' or 'not'!"
             " Use '&', '|' or '~' instead!")
 
 
