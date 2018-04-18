@@ -87,7 +87,9 @@ class HostsEntry(Entry):
         parts = [self._address.compressed] + self._hosts
         if self._comment:
             parts.append('#' + self._comment)
-        return '\t'.join(parts)
+        # IP address and first host name will be splitted by '\t'.
+        # And the host names will spilt by space ' '.
+        return parts[0] + '\t' + ' '.join(parts[1:])
 
     @classmethod
     def from_string(cls, value):
