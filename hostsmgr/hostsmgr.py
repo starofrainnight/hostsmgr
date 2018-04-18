@@ -63,8 +63,7 @@ class HostsMgr(object):
         """Load hosts from file
 
         :param file: The opened file object (should open with read text
-        mode) or str path to hosts file, it will guess hosts path in current
-        OS if not specificed, defaults to None
+        mode) or str path to hosts file
         :param file: str or file object, optional
         """
 
@@ -91,7 +90,7 @@ class HostsMgr(object):
         """Save hosts to file
 
         :param file: The opened file object (should open with write text mode)
-        or str path to hosts file, it will save to path previous specificed
+        or str path to hosts file
         :param file: str or file object, optional
         """
 
