@@ -16,10 +16,10 @@ script: tox
 # travis_pypi_setup.py script to finish PyPI deployment setup
 deploy:
   provider: pypi
-  distributions: sdist bdist_wheel
+  distributions: sdist
   user: starofrainnight
   password:
-    secure: PLEASE_REPLACE_ME
+    secure: "bjAe07nowLMzloD4efy6SHnFUh6PUt0OfMILkywRGeAyJl1kkR5GXHIQ71DiCXBvaikoPht+N0KNwTJvPzwToqivHkysxDSyfk1aZPZa3zkBFE1MNBErb2wG2o4AyU9bGeClxYgbKcBMRybaH79XdS0o3W22idDeM/R11rKLaLYUkvM0pe7oD0RSzRdJpRceBqoriklkuO1SYFW5anRqjQoKdwBqm3rVC06rXEyLKCYaXKjrOpaTA+8nI0yr+qo4SUqo3TRODWq0EzbmdhyTfg4DAN9MRCftkOV4bydT9XAe5FQMnOYCy+iKD8Cr1eiTq5EuYL2rSXFdohgtvhL6D/3Q7WcG0LVh7yPH2j9hz7Dcp7nZZ47ENpTzvdEIdybmw8AKQ8mgQFc0ROCSuP4K/+bpr25oJ7pa8UoDr26I3K2nmHBkEyYq8GGClHqTeIQJ793AO2dXCciuMguBdV1ocyD9oRdhycWmbdf4QcNhFa5teXATPzI8x1BExbdaTKl9xZOKWrsDyg71Zl7LBKaFBUYLhGeJElxjMR0z/J8asl7uOBvT6VzW/ArmxOVwgtqW8aKHDMVQ2iFppmarNAZ+1GSJqGxscxPxMp6doRHs9Sx/NjUyz2X3kxfC4YujWjDdDH57zVPLsHGZPPPJGBh/waBHLHKNZ9HLLp9Zl2aYa+A="
   on:
     tags: true
     repo: starofrainnight/hostsmgr
