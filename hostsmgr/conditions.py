@@ -29,7 +29,11 @@ class Condition(object):
             " Use '&', '|' or '~' instead!")
 
 
-class Any(Condition):
+class Operator(Condition):
+    pass
+
+
+class Any(Operator):
 
     def __init__(self, *args):
         super().__init__()
@@ -44,7 +48,7 @@ class Any(Condition):
         return False
 
 
-class All(Condition):
+class All(Operator):
 
     def __init__(self, *args):
         super().__init__()
@@ -59,7 +63,7 @@ class All(Condition):
         return True
 
 
-class Not(Condition):
+class Not(Operator):
 
     def __init__(self, cond):
         super().__init__()
