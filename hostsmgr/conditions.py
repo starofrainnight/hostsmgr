@@ -3,7 +3,7 @@
 """
 
 import ipaddress
-from .entry import HostsEntry
+from .entries import HostsEntry
 
 
 class Condition(object):

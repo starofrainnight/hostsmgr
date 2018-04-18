@@ -9,7 +9,7 @@ import os.path
 import tempfile
 from hostsmgr import HostsMgr
 from hostsmgr.hostsmgr import guess_hosts_path
-from hostsmgr.entry import *
+from hostsmgr.entries import *
 from hostsmgr.conditions import *
 
 

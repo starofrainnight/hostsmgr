@@ -6,8 +6,8 @@ import io
 import os
 import sys
 import os.path
-from .entry import HostsEntry
-from .entry import from_string as entry_from_string
+from .entries import HostsEntry
+from .entries import from_string as entry_from_string
 from .exceptions import *
 from .conditions import Any, All
 from six import string_types
