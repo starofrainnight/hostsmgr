@@ -82,10 +82,12 @@ class HostsEntryFilter(Condition):
 class IPAddress(HostsEntryFilter):
 
     def __init__(self, address):
+        super().__init__()
+
         self._address = ipaddress.ip_address(address)
 
     def __call__(self, entry):
-        if not super().__init__(entry):
+        if not super().__call__(entry):
             return False
 
         return self._address == entry.address
@@ -94,10 +96,12 @@ class IPAddress(HostsEntryFilter):
 class Host(HostsEntryFilter):
 
     def __init__(self, host):
+        super().__init__()
+
         self._host = host
 
     def __call__(self, entry):
-        if not super().__init__(entry):
+        if not super().__call__(entry):
             return False
 
         return self._host in entry.hosts
@@ -106,11 +110,13 @@ class Host(HostsEntryFilter):
 class InLineComment(HostsEntryFilter):
 
     def __init__(self, value, case_sensitivity=True):
+        super().__init__()
+
         self._value = value
         self._case_sensitivity = case_sensitivity
 
     def __call__(self, entry):
-        if not super().__init__(entry):
+        if not super().__call__(entry):
             return False
 
         if self._case_sensitivity:
