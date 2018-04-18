@@ -37,41 +37,41 @@ def test_guess_hosts_path():
 
 def test_load_entries_from_string(mgr):
 
-    mgr.load(io.StringIO(""))
+    mgr.loads("")
     assert len(mgr._entries) == 0
 
-    mgr.load(io.StringIO("127.0.0.1 localhost"))
+    mgr.loads("127.0.0.1 localhost")
     assert (len(mgr._entries) == 1) and (
         isinstance(mgr._entries[0], HostsEntry))
 
-    mgr.load(io.StringIO("127.0.0.1 localhost\n"))
+    mgr.loads("127.0.0.1 localhost\n")
     assert (len(mgr._entries) == 1) and (
         isinstance(mgr._entries[0], HostsEntry))
 
-    mgr.load(io.StringIO("127.0.0.1"))
+    mgr.loads("127.0.0.1")
     assert (len(mgr._entries) == 1) and (isinstance(mgr._entries[0], RawEntry))
 
-    mgr.load(io.StringIO("#"))
+    mgr.loads("#")
     assert (len(mgr._entries) == 1) and (
         isinstance(mgr._entries[0], CommentEntry))
 
-    mgr.load(io.StringIO("# "))
+    mgr.loads("# ")
     assert (len(mgr._entries) == 1) and (
         isinstance(mgr._entries[0], CommentEntry))
 
-    mgr.load(io.StringIO(" # "))
+    mgr.loads(" # ")
     assert (len(mgr._entries) == 1) and (
         isinstance(mgr._entries[0], CommentEntry))
 
-    mgr.load(io.StringIO("    # "))
+    mgr.loads("    # ")
     assert (len(mgr._entries) == 1) and (
         isinstance(mgr._entries[0], CommentEntry))
 
-    mgr.load(io.StringIO(" # \n\n"))
+    mgr.loads(" # \n\n")
     assert (len(mgr._entries) == 2) and (
         isinstance(mgr._entries[0], CommentEntry))
 
-    mgr.load(io.StringIO(" # hello!\n\n#kknd"))
+    mgr.loads(" # hello!\n\n#kknd")
     assert (len(mgr._entries) == 3) and (
         isinstance(mgr._entries[0], CommentEntry)) and (
         isinstance(mgr._entries[2], CommentEntry))
