@@ -78,10 +78,21 @@ class Or(Any):
     pass
 
 
-class HostsEntryFilter(Condition):
+class EntryFilter(Condition):
+
+    def __init__(self, entry_class):
+        super().__init__()
+
+        self._entry_class = entry_class
 
     def __call__(self, entry):
-        return isinstance(entry, HostsEntry)
+        return isinstance(entry, self._entry_class)
+
+
+class HostsEntryFilter(EntryFilter):
+
+    def __init__(self):
+        super().__init__(HostsEntry)
 
 
 class IPAddress(HostsEntryFilter):
