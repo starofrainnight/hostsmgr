@@ -84,7 +84,7 @@ class HostsEntry(Entry):
 
     @property
     def expansion(self):
-        parts = [self._address.compressed, *self._hosts]
+        parts = [self._address.compressed] + self._hosts
         if self._comment:
             parts.append('#' + self._comment)
         return '\t'.join(parts)
