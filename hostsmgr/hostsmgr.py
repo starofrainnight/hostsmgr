@@ -9,7 +9,7 @@ import os.path
 from .entries import HostsEntry
 from .entries import from_string as entry_from_string
 from .exceptions import *
-from .conditions import Any, All
+from .conditions import Any, All, IPAddress, Host
 from six import string_types
 
 
@@ -149,3 +149,40 @@ class HostsMgr(object):
         """
 
         return bool(self.find(condition, at_most=1))
+
+    def add(self, hosts_entry):
+        """Append the hosts entry to the end of hosts table
+
+        :param hosts_entry: The new hosts entry which want to append the hosts
+        :type hosts_entry: HostsEntry
+        :raises ValueError: If there have any host same with one of hosts_entry
+        host item.
+        """
+
+        if not hosts_entry.hosts:
+            raise ValueError("HostsEntry's hosts must not empty!")
+
+        matched = self.find(
+            IPAddress(hosts_entry.address) & Any(
+                *[Host(h) for h in hosts_entry.hosts]))
+
+        if matched:
+            matched_hosts = []
+            for entry in matched:
+                matched_hosts += entry.hosts
+
+            raise ValueError(
+                'These hosts exists already : %s' % matched_hosts)
+
+        # There nothing same with us, append one
+        self._entries.append(hosts_entry)
+
+    def remove_by_hosts(self, hosts):
+        matched = self.find(Any(*[Host(h) for h in hosts_entry.hosts]))
+        for entry in matched:
+            for host in hosts:
+                entry.hosts.remove(host)
+
+            # Remove the whole entry if hosts entry don't have any hosts
+            if len(entry.hosts) <= 0:
+                self._entries.remove(entry)
