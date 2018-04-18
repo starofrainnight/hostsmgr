@@ -14,14 +14,19 @@ class Condition(object):
     def __call__(self, entry):
         raise NotImplementedError()
 
-    def __and__(self, a, b):
-        return And(a, b)
+    def __and__(self, other):
+        return And(self, other)
 
-    def __or__(self, a, b):
-        return Or(a, b)
+    def __or__(self, other):
+        return Or(self, other)
 
-    def __not__(self, obj):
-        return Not(obj)
+    def __not__(self):
+        return Not(self)
+
+    def __bool__(self):
+        raise NotImplementedError(
+            "Not supported logical operators just like 'and', 'or' or 'not'!"
+            " Use '&', '|' or '~' instead!")
 
 
 class Any(Condition):
