@@ -59,7 +59,7 @@ class HostsMgr(object):
     def clear(self):
         self._entries.clear()
 
-    def load(self, file=None):
+    def load(self, file):
         """Load hosts from file
 
         :param file: The opened file object (should open with read text
@@ -70,25 +70,19 @@ class HostsMgr(object):
 
         self.clear()
 
-        file_path = None
-        if file:
-            if isinstance(file, string_types):
-                file_path = file
-        else:
-            file_path = guess_hosts_path()
-
-        if file_path:
-            file = open(file_path, 'r')
+        src_file = file
+        if isinstance(file, string_types):
+            src_file = open(file, 'r')
 
         # Analyse hosts format
         try:
-            for line in file.readlines():
+            for line in src_file.readlines():
                 # There maybe \r, \n or both at the end of line.
                 line = line.rstrip()
                 self._entries.append(entry_from_string(line))
         finally:
-            if file_path:
-                file.close()
+            if isinstance(file, string_types):
+                src_file.close()
 
     def loads(self, astr):
         self.load(io.StringIO(astr))
@@ -102,7 +96,7 @@ class HostsMgr(object):
         """
 
         dst_file = file
-        if file and isinstance(file, string_types):
+        if isinstance(file, string_types):
             dst_file = open(file, 'w')
 
         try:
