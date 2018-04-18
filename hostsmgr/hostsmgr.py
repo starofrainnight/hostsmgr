@@ -6,8 +6,10 @@ import io
 import os
 import sys
 import os.path
+from .entry import HostsEntry
 from .entry import from_string as entry_from_string
 from .exceptions import *
+from .conditions import Any, All
 from six import string_types
 
 
@@ -64,7 +66,7 @@ class HostsMgr(object):
 
         :param file: The opened file object (should open with read text
         mode) or str path to hosts file
-        :param file: str or file object, optional
+        :type file: str or file object, optional
         """
 
         self.clear()
@@ -91,7 +93,7 @@ class HostsMgr(object):
 
         :param file: The opened file object (should open with write text mode)
         or str path to hosts file
-        :param file: str or file object, optional
+        :type file: str or file object, optional
         """
 
         hosts_file = file
@@ -109,3 +111,30 @@ class HostsMgr(object):
         strio = io.StringIO()
         self.save(strio)
         return strio.getvalue()
+
+    def find(self, condition, at_most=0):
+        """Find entries by provided condition
+
+        :param condition: The entries must match this condition
+        :type condition: conditions.Condition
+        :param at_most: How much we will stop finding at most, defaults to 0
+        means unlimited.
+        :type at_most: int, optional
+        :return: A list of founded entries
+        :rtype: list
+        """
+
+        if isinstance(condition, list):
+            condition = All(*condition)
+
+        found_entries = []
+
+        for entry in self._entries:
+            if not condition(entry):
+                continue
+
+            found_entries.append(entry)
+            if (at_most >= 1) and (len(found_entries) >= at_most):
+                break
+
+        return found_entries
