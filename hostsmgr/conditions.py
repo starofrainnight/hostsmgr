@@ -135,7 +135,7 @@ class Host(HostsEntryFilter):
         return self._host in entry.hosts
 
 
-class InLineComment(HostsEntryFilter):
+class InlineComment(HostsEntryFilter):
 
     def __init__(self, value, case_sensitivity=True):
         super().__init__()
