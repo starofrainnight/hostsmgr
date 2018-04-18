@@ -54,7 +54,6 @@ def guess_hosts_path():
 class HostsMgr(object):
 
     def __init__(self):
-        self._path = None
         self._entries = []
 
     def clear(self):
@@ -81,9 +80,6 @@ class HostsMgr(object):
         if file_path:
             file = open(file_path, 'r')
 
-            # Save file path only if correctly opened.
-            self._path = file_path
-
         # Analyse hosts format
         try:
             for line in file.readlines():
@@ -91,36 +87,29 @@ class HostsMgr(object):
                 line = line.rstrip()
                 self._entries.append(entry_from_string(line))
         finally:
-            if self._path:
+            if file_path:
                 file.close()
 
     def loads(self, astr):
         self.load(io.StringIO(astr))
 
-    def save(self, file=None):
+    def save(self, file):
         """Save hosts to file
 
-        :raises HostsNotFound: If file set to None and previous load() without a
-        valid path.
         :param file: The opened file object (should open with write text mode)
-        or str path to hosts file, it will save to path previous specificed,
-        defaults to None
+        or str path to hosts file, it will save to path previous specificed
         :param file: str or file object, optional
         """
 
-        if file:
-            dst_file = file
-        else:
-            if not os.path.exists(self._path):
-                raise HostsNotFound()
-
-            dst_file = open(self._path, 'w')
+        dst_file = file
+        if file and isinstance(file, string_types):
+            dst_file = open(file, 'w')
 
         try:
             dst_file.writelines(
                 [entry.expansion for entry in self._entries])
         finally:
-            if not file:
+            if isinstance(file, string_types):
                 dst_file.close()
 
     def saves(self):
