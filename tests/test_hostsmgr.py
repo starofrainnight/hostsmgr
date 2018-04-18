@@ -42,11 +42,11 @@ def test_load_entries_from_string(mgr):
 
     mgr.load(io.StringIO("127.0.0.1 localhost"))
     assert (len(mgr._entries) == 1) and (
-        isinstance(mgr._entries[0], HostEntry))
+        isinstance(mgr._entries[0], HostsEntry))
 
     mgr.load(io.StringIO("127.0.0.1 localhost\n"))
     assert (len(mgr._entries) == 1) and (
-        isinstance(mgr._entries[0], HostEntry))
+        isinstance(mgr._entries[0], HostsEntry))
 
     mgr.load(io.StringIO("127.0.0.1"))
     assert (len(mgr._entries) == 1) and (isinstance(mgr._entries[0], RawEntry))

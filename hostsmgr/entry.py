@@ -46,7 +46,7 @@ class CommentEntry(Entry):
         return cls(matched.group(2), matched.group(1))
 
 
-class HostEntry(Entry):
+class HostsEntry(Entry):
 
     def __init__(self, address, hosts=[], comment=None):
         self._address = self._to_address(address)
@@ -113,7 +113,7 @@ class HostEntry(Entry):
 
 
 def from_string(value):
-    entry_classes = [CommentEntry, HostEntry]
+    entry_classes = [CommentEntry, HostsEntry]
 
     for cls in entry_classes:
         try:
