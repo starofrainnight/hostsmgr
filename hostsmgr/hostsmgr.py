@@ -71,14 +71,18 @@ class HostsMgr(object):
 
         self.clear()
 
+        file_path = None
         if file:
             if isinstance(file, string_types):
-                self._path = file
+                file_path = file
         else:
-            self._path = guess_hosts_path()
+            file_path = guess_hosts_path()
 
-        if self._path:
-            file = open(self._path, 'r')
+        if file_path:
+            file = open(file_path, 'r')
+
+            # Save file path only if correctly opened.
+            self._path = file_path
 
         # Analyse hosts format
         try:
