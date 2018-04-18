@@ -15,13 +15,13 @@ class Condition(object):
         raise NotImplementedError()
 
     def __and__(self, other):
-        return And(self, other)
+        return _And(self, other)
 
     def __or__(self, other):
-        return Or(self, other)
+        return _Or(self, other)
 
     def __not__(self):
-        return Not(self)
+        return _Not(self)
 
     def __bool__(self):
         raise NotImplementedError(
@@ -63,7 +63,7 @@ class All(Operator):
         return True
 
 
-class Not(Operator):
+class _Not(Operator):
 
     def __init__(self, cond):
         super().__init__()
@@ -74,11 +74,11 @@ class Not(Operator):
         return not cond(entry)
 
 
-class And(All):
+class _And(All):
     pass
 
 
-class Or(Any):
+class _Or(Any):
     pass
 
 
