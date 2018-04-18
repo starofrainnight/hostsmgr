@@ -3,7 +3,7 @@
 """
 
 import ipaddress
-from .entries import HostsEntry
+from .entries import HostsEntry, CommentEntry, RawEntry
 
 
 class Condition(object):
@@ -93,6 +93,18 @@ class HostsEntryFilter(EntryFilter):
 
     def __init__(self):
         super().__init__(HostsEntry)
+
+
+class CommentEntryFilter(EntryFilter):
+
+    def __init__(self):
+        super().__init__(CommentEntry)
+
+
+class RawEntryFilter(EntryFilter):
+
+    def __init__(self):
+        super().__init__(RawEntry)
 
 
 class IPAddress(HostsEntryFilter):
