@@ -71,7 +71,7 @@ install:
   # Prepare test utility
   - "pip install tox"
 
-build: false
+build: off
 
 test_script:
   # Run the project tests
