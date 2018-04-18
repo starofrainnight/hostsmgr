@@ -5,6 +5,7 @@
 
 import io
 import pytest
+import os.path
 
 from hostsmgr import HostsMgr
 from hostsmgr.hostsmgr import guess_hosts_path
@@ -83,3 +84,8 @@ def test_save_entries_to_string(mgr):
     dst_hosts = mgr.saves()
     required_hosts = '127.0.0.1\tabc.com'
     assert dst_hosts == required_hosts
+
+
+def test_read_from_file(mgr):
+    path = os.path.join(os.path.dirname(__file__), 'data/hosts.txt')
+    mgr.load(path)
