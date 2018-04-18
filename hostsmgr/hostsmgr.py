@@ -138,3 +138,14 @@ class HostsMgr(object):
                 break
 
         return found_entries
+
+    def check(self, condition):
+        """Check if there have any entry matched with provided condition
+
+        :param condition: The condition need to check for
+        :type condition: conditions.Condition
+        :return: True if condition matched. Otherwise return False.
+        :rtype: bool
+        """
+
+        return bool(self.find(condition, at_most=1))
