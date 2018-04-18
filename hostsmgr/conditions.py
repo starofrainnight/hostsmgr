@@ -3,7 +3,7 @@
 """
 
 import ipaddress
-from entry import HostsEntry
+from .entry import HostsEntry
 
 
 class Condition(object):
@@ -76,7 +76,7 @@ class Or(Any):
 class HostsEntryFilter(Condition):
 
     def __call__(self, entry):
-        return isinstance(entry, HostsEntry):
+        return isinstance(entry, HostsEntry)
 
 
 class IPAddress(HostsEntryFilter):
