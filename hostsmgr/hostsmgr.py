@@ -70,19 +70,19 @@ class HostsMgr(object):
 
         self.clear()
 
-        src_file = file
+        hosts_file = file
         if isinstance(file, string_types):
-            src_file = open(file, 'r')
+            hosts_file = open(file, 'r')
 
         # Analyse hosts format
         try:
-            for line in src_file.readlines():
+            for line in hosts_file.readlines():
                 # There maybe \r, \n or both at the end of line.
                 line = line.rstrip()
                 self._entries.append(entry_from_string(line))
         finally:
             if isinstance(file, string_types):
-                src_file.close()
+                hosts_file.close()
 
     def loads(self, astr):
         self.load(io.StringIO(astr))
@@ -95,16 +95,16 @@ class HostsMgr(object):
         :param file: str or file object, optional
         """
 
-        dst_file = file
+        hosts_file = file
         if isinstance(file, string_types):
-            dst_file = open(file, 'w')
+            hosts_file = open(file, 'w')
 
         try:
-            dst_file.writelines(
+            hosts_file.writelines(
                 [entry.expansion for entry in self._entries])
         finally:
             if isinstance(file, string_types):
-                dst_file.close()
+                hosts_file.close()
 
     def saves(self):
         strio = io.StringIO()
