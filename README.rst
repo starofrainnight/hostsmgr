@@ -31,7 +31,52 @@ API for manage hosts file
 Features
 --------
 
-* TODO
+Usage
+--------
+
+.. code:: python
+
+    from hostsmgr import HostsMgr
+    from hostsmgr.hostsmgr import guess_hosts_path
+    from hostsmgr.conditions import IPAddress, Host, InlineComment
+
+    mgr = HostsMgr()
+
+    # Load system hosts file
+    mgr.load(guess_hosts_path())
+
+    # Save hosts to another place (Must open with text mode !)
+    mgr.save(open('/etc/hosts.old', 'w'))
+
+    # Save hosts to string with hosts file format
+    hosts_string = mgr.saves()
+
+    # Find all hosts entries that with 127.0.0.1 address
+    entries = mgr.find(IPAddress('127.0.0.1'))
+
+    # Find all entries that contained specific host
+    entries = mgr.find(Host('localhost'))
+
+    # Find all entries that contained specificed ip address and host both
+    entries = mgr.find(IPAddress('127.0.0.1') & Host('localhost'))
+
+    # Find all entries that contained either hosts
+    entries = mgr.find(Host('ip6-localhost') | Host('localhost'))
+
+    # Find all entries that contained either hosts
+    entries = mgr.find(Host('ip6-localhost') | Host('localhost'))
+
+    # Remove an entry that found by find()
+    mgr.remove(entry)
+
+    # Remove all hosts from hosts entries
+    mgr.remove_by_hosts(['localhost', 'ip6-localhost'])
+
+    # Remove all entries by inline comment exactly matched
+    mgr.remove_by_inline_comment(InlineComment('TAG_FOR_EXAMPLE'))
+
+    # Remove all entries by inline comment partial matched
+    mgr.remove_by_inline_comment(InlineComment('TAG_FOR_EXAMPLE', partial=True))
 
 Credits
 ---------
