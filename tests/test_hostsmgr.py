@@ -82,7 +82,7 @@ def test_save_entries_to_string(mgr):
     src_hosts = "127.0.0.1     abc.com"
     mgr.loads(src_hosts)
     dst_hosts = mgr.saves()
-    required_hosts = '127.0.0.1\tabc.com'
+    required_hosts = '127.0.0.1\tabc.com\n'
     assert dst_hosts == required_hosts
 
 
