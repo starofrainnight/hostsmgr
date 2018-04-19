@@ -38,7 +38,7 @@ setup(
     install_requires=install_requires,
     license="Apache Software License",
     zip_safe=False,
-    keywords='hostsmgr',
+    keywords='hosts,hostsmgr',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
