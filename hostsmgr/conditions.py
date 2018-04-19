@@ -71,7 +71,7 @@ class _Not(Operator):
         self._cond = cond
 
     def __call__(self, entry):
-        return not cond(entry)
+        return not self._cond(entry)
 
 
 class _And(All):

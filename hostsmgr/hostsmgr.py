@@ -4,11 +4,9 @@
 
 import io
 import os
-import sys
 import os.path
-from .entries import HostsEntry
 from .entries import from_string as entry_from_string
-from .exceptions import *
+from .exceptions import HostsNotFound
 from .conditions import Any, All, IPAddress, Host, InlineComment
 from six import string_types
 
@@ -178,7 +176,7 @@ class HostsMgr(object):
         self._entries.append(hosts_entry)
 
     def remove_by_hosts(self, hosts, at_most=0):
-        matched = self.find(Any(*[Host(h) for h in hosts_entry.hosts]),
+        matched = self.find(Any(*[Host(h) for h in hosts]),
                             at_most)
         for entry in matched:
             for host in hosts:

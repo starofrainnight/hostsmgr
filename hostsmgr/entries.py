@@ -2,7 +2,7 @@
 
 import re
 import ipaddress
-from .exceptions import *
+from .exceptions import InvalidFormat
 from six import string_types
 
 
