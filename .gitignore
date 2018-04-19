@@ -70,3 +70,6 @@ target/
 # coverage generated files
 htmlcov/
 .coverage
+
+# pytest
+.pytest_cache
