@@ -68,7 +68,7 @@ class HostsMgr(object):
         """Load hosts from file
 
         :param file: The opened file object (should open with read text
-        mode) or str path to hosts file
+            mode) or str path to hosts file
         :type file: str or file object, optional
         """
 
@@ -101,7 +101,7 @@ class HostsMgr(object):
         """Save hosts to file
 
         :param file: The opened file object (should open with write text mode)
-        or str path to hosts file
+            or str path to hosts file
         :type file: str or file object, optional
         """
 
@@ -133,7 +133,7 @@ class HostsMgr(object):
         :param conditions: The entries must match this conditions
         :type conditions: conditions.Condition
         :param at_most: How much we will stop finding at most, defaults to 0
-        means unlimited.
+            means unlimited.
         :type at_most: int, optional
         :return: A list of founded entries
         :rtype: list
@@ -173,7 +173,7 @@ class HostsMgr(object):
         :param force: True if we want to remove all provied hosts.
         :type force: bool
         :raises ValueError: If there have any host same with one of provided
-        hosts and force not equal to True.
+            hosts and force not equal to True.
         """
 
         if not hosts_entry.hosts:
@@ -212,7 +212,7 @@ class HostsMgr(object):
         :param hosts: A list hosts that needs to be removed
         :type hosts: list[str]
         :param at_most: How many hosts should be removed by one shot, 0 means
-        infinite, defaults to 0
+            infinite, defaults to 0
         :type at_most: int, optional
         """
 
@@ -241,7 +241,7 @@ class HostsMgr(object):
         :param ic_cond: An inline comment condition object with search behavior
         :type ic_cond: InlineComment
         :param at_most: How many hosts should be removed by one shot, 0 means
-        infinite, defaults to 0
+            infinite, defaults to 0
         :param at_most: int, optional
         """
 
