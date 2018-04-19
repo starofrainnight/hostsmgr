@@ -100,9 +100,5 @@ target/
 # Ignore mypy stuffs
 .mypy_cache
 
-# coverage generated files
-htmlcov/
-.coverage
-
 # pytest
 .pytest_cache
