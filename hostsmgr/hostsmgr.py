@@ -127,11 +127,11 @@ class HostsMgr(object):
         self.save(strio)
         return strio.getvalue()
 
-    def find(self, condition, at_most=0):
+    def find(self, conditions, at_most=0):
         """Find entries by provided condition
 
-        :param condition: The entries must match this condition
-        :type condition: conditions.Condition
+        :param conditions: The entries must match this conditions
+        :type conditions: conditions.Condition
         :param at_most: How much we will stop finding at most, defaults to 0
         means unlimited.
         :type at_most: int, optional
@@ -139,13 +139,13 @@ class HostsMgr(object):
         :rtype: list
         """
 
-        if isinstance(condition, list):
-            condition = All(*condition)
+        if isinstance(conditions, list):
+            conditions = All(*conditions)
 
         found_entries = []
 
         for entry in self._entries:
-            if not condition(entry):
+            if not conditions(entry):
                 continue
 
             found_entries.append(entry)
@@ -154,16 +154,16 @@ class HostsMgr(object):
 
         return found_entries
 
-    def check(self, condition):
+    def check(self, conditions):
         """Check if there have any entry matched with provided condition
 
-        :param condition: The condition need to check for
-        :type condition: conditions.Condition
+        :param conditions: The condition need to check for
+        :type conditions: conditions.Condition
         :return: True if condition matched. Otherwise return False.
         :rtype: bool
         """
 
-        return bool(self.find(condition, at_most=1))
+        return bool(self.find(conditions, at_most=1))
 
     def add(self, hosts_entry, force=False):
         """Append the hosts entry to the end of hosts table
