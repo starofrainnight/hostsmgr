@@ -148,29 +148,34 @@ class HostsMgr(object):
 
         return bool(self.find(condition, at_most=1))
 
-    def add(self, hosts_entry):
+    def add(self, hosts_entry, force=False):
         """Append the hosts entry to the end of hosts table
 
         :param hosts_entry: The new hosts entry which want to append the hosts
         :type hosts_entry: HostsEntry
-        :raises ValueError: If there have any host same with one of hosts_entry
-        host item.
+        :param force: True if we want to remove all provied hosts.
+        :type force: bool
+        :raises ValueError: If there have any host same with one of provided
+        hosts and force not equal to True.
         """
 
         if not hosts_entry.hosts:
             raise ValueError("HostsEntry's hosts must not empty!")
 
-        matched = self.find(
-            IPAddress(hosts_entry.address) & Any(
-                *[Host(h) for h in hosts_entry.hosts]))
+        if force:
+            self.remove_by_hosts(hosts_entry.hosts)
+        else:
+            matched = self.find(
+                IPAddress(hosts_entry.address) &
+                Any(*[Host(h) for h in hosts_entry.hosts]))
 
-        if matched:
-            matched_hosts = []
-            for entry in matched:
-                matched_hosts += entry.hosts
+            if matched:
+                matched_hosts = []
+                for entry in matched:
+                    matched_hosts += entry.hosts
 
-            raise ValueError(
-                'These hosts exists already : %s' % matched_hosts)
+                raise ValueError(
+                    'These hosts exists already : %s' % matched_hosts)
 
         # There nothing same with us, append one
         self._entries.append(hosts_entry)
