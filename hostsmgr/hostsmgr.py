@@ -220,7 +220,11 @@ class HostsMgr(object):
                             at_most)
         for entry in matched:
             for host in hosts:
-                entry.hosts.remove(host)
+                try:
+                    entry.hosts.remove(host)
+                except ValueError:
+                    # Ignore value not found exception
+                    pass
 
             # Remove the whole entry if hosts entry don't have any hosts
             if len(entry.hosts) <= 0:
