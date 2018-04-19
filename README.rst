@@ -38,7 +38,7 @@ Usage
 
     from hostsmgr import HostsMgr
     from hostsmgr.hostsmgr import guess_hosts_path
-    from hostsmgr.conditions import IPAddress, Host, InlineComment
+    from hostsmgr.conditions import Any, All, IPAddress, Host, InlineComment
 
     mgr = HostsMgr()
 
@@ -63,8 +63,20 @@ Usage
     # Find all entries that contained either hosts
     entries = mgr.find(Host('ip6-localhost') | Host('localhost'))
 
-    # Find all entries that contained either hosts
-    entries = mgr.find(Host('ip6-localhost') | Host('localhost'))
+    # Find all entries that contained either hosts, another method
+    entries = mgr.find(Any(Host('ip6-localhost'), Host('localhost')))
+
+    # Find all entries that contained both hosts
+    entries = mgr.find(Host('ip6-localhost') & Host('localhost'))
+
+    # Find all entries that contained both hosts, another method
+    entries = mgr.find(All(Host('ip6-localhost'), Host('localhost')))
+
+    # Find all entries that contained target inline comment
+    entries = mgr.find(InlineComment('THIS_IS_A_TAG'))
+
+    # Find only one entry that contained target inline comment
+    entries = mgr.find(InlineComment('THIS_IS_A_TAG'), at_most=1)
 
     # Remove an entry that found by find()
     mgr.remove(entry)
