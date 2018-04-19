@@ -52,11 +52,16 @@ def guess_hosts_path():
 
 
 class HostsMgr(object):
+    """Hosts file manager.
+    """
 
     def __init__(self):
         self._entries = []
 
     def clear(self):
+        """Clear all entries
+        """
+
         self._entries.clear()
 
     def load(self, file):
@@ -84,6 +89,12 @@ class HostsMgr(object):
                 hosts_file.close()
 
     def loads(self, astr):
+        """Load hosts items from string
+
+        :param astr: Hosts file format string
+        :type astr: str
+        """
+
         self.load(io.StringIO(astr))
 
     def save(self, file):
@@ -106,6 +117,12 @@ class HostsMgr(object):
                 hosts_file.close()
 
     def saves(self):
+        """Save to string with hosts file format
+
+        :return: Hosts file formatted string
+        :rtype: str
+        """
+
         strio = io.StringIO()
         self.save(strio)
         return strio.getvalue()
@@ -181,6 +198,15 @@ class HostsMgr(object):
         self._entries.append(hosts_entry)
 
     def remove_by_hosts(self, hosts, at_most=0):
+        """Remove hosts from entries
+
+        :param hosts: A list hosts that needs to be removed
+        :type hosts: list[str]
+        :param at_most: How many hosts should be removed by one shot, 0 means
+        infinite, defaults to 0
+        :type at_most: int, optional
+        """
+
         matched = self.find(Any(*[Host(h) for h in hosts]),
                             at_most)
         for entry in matched:
@@ -192,6 +218,18 @@ class HostsMgr(object):
                 self._entries.remove(entry)
 
     def remove_by_inline_comment(self, ic_cond: InlineComment, at_most=0):
+        """Remove entries by it's inline comment
+
+        Innormally, you could use inline comment as tag, so you could easily
+        related items by them.
+
+        :param ic_cond: An inline comment condition object with search behavior
+        :type ic_cond: InlineComment
+        :param at_most: How many hosts should be removed by one shot, 0 means
+        infinite, defaults to 0
+        :param at_most: int, optional
+        """
+
         matched = self.find(ic_cond, at_most)
         for entry in matched:
             self._entries.remove(entry)
