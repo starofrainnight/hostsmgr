@@ -141,10 +141,11 @@ class Host(HostsEntryFilter):
 
 class InlineComment(HostsEntryFilter):
 
-    def __init__(self, value, case_sensitivity=True):
+    def __init__(self, value, partial=False, case_sensitivity=True):
         super().__init__()
 
         self._value = value
+        self._partial = partial
         self._case_sensitivity = case_sensitivity
 
     def __call__(self, entry):
@@ -152,6 +153,12 @@ class InlineComment(HostsEntryFilter):
             return False
 
         if self._case_sensitivity:
-            return self._value == entry.comment
+            if self._partial:
+                return self._value in entry.comment
+            else:
+                return self._value == entry.comment
         else:
-            return self._value.lower() == entry.comment.lower()
+            if self._partial:
+                return self._value.lower() in entry.comment.lower()
+            else:
+                return self._value.lower() == entry.comment.lower()
