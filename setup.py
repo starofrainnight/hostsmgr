@@ -27,7 +27,7 @@ tests_requires = [
 
 setup(
     name='hostsmgr',
-    version='0.2.3',
+    version='0.2.4',
     description="API for manage hosts file",
     long_description=long_description,
     author="Hong-She Liang",
