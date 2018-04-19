@@ -20,7 +20,7 @@ setup_requires = [
     # etc.) here
 ]
 
-test_requires = [
+tests_requires = [
     'pytest',
     # TODO: put package test requirements here
 ]
@@ -50,6 +50,6 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     test_suite='tests',
-    tests_require=test_requires,
+    tests_require=tests_requires,
     setup_requires=setup_requires,
 )
