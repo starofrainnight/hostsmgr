@@ -197,6 +197,15 @@ class HostsMgr(object):
         # There nothing same with us, append one
         self._entries.append(hosts_entry)
 
+    def remove(self, entry):
+        """Remove an entry that found by find() method
+
+        :param entry: An entry want to remove
+        :type entry: hostsmgr.entries.Entry
+        """
+
+        self._entries.remove(entry)
+
     def remove_by_hosts(self, hosts, at_most=0):
         """Remove hosts from entries
 
