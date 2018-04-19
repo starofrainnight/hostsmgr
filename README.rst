@@ -82,7 +82,7 @@ Usage
     mgr.remove(entry)
 
     # Remove all hosts from hosts entries
-    mgr.remove_by_hosts(['localhost', 'ip6-localhost'])
+    mgr.remove_hosts(['localhost', 'ip6-localhost'])
 
     # Remove all entries by inline comment exactly matched
     mgr.remove_by_inline_comment(InlineComment('TAG_FOR_EXAMPLE'))

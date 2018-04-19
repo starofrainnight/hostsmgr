@@ -180,7 +180,7 @@ class HostsMgr(object):
             raise ValueError("HostsEntry's hosts must not empty!")
 
         if force:
-            self.remove_by_hosts(hosts_entry.hosts)
+            self.remove_hosts(hosts_entry.hosts)
         else:
             matched = self.find(
                 IPAddress(hosts_entry.address) &
@@ -206,7 +206,7 @@ class HostsMgr(object):
 
         self._entries.remove(entry)
 
-    def remove_by_hosts(self, hosts, at_most=0):
+    def remove_hosts(self, hosts, at_most=0):
         """Remove hosts from entries
 
         :param hosts: A list hosts that needs to be removed
