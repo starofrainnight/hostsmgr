@@ -3,14 +3,13 @@
 
 """Tests for `hostsmgr` package."""
 
-import io
 import pytest
 import os.path
 import tempfile
 from hostsmgr import HostsMgr
 from hostsmgr.hostsmgr import guess_hosts_path
-from hostsmgr.entries import *
-from hostsmgr.conditions import *
+from hostsmgr.entries import HostsEntry, CommentEntry, RawEntry
+from hostsmgr.conditions import IPAddress, Host
 
 
 @pytest.fixture
