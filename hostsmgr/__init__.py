@@ -2,8 +2,7 @@
 
 """Top-level package for hostsmgr."""
 
-# flake8: noqa
-from .hostsmgr import HostsMgr
+from .hostsmgr import HostsMgr  # noqa
 
 __author__ = """Hong-She Liang"""
 __email__ = 'starofrainnight@gmail.com'
