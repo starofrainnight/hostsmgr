@@ -111,7 +111,7 @@ class HostsMgr(object):
 
         try:
             hosts_file.writelines(
-                [entry.expansion for entry in self._entries])
+                [entry.expansion + '\n' for entry in self._entries])
         finally:
             if isinstance(file, string_types):
                 hosts_file.close()
