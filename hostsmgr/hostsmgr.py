@@ -226,6 +226,8 @@ class HostsMgr(object):
             if len(entry.hosts) <= 0:
                 self._entries.remove(entry)
 
+        return bool(matched)
+
     def remove_by_inline_comment(self, ic_cond: InlineComment, at_most=0):
         """Remove entries by it's inline comment
 
@@ -242,3 +244,5 @@ class HostsMgr(object):
         matched = self.find(ic_cond, at_most)
         for entry in matched:
             self._entries.remove(entry)
+
+        return bool(matched)
