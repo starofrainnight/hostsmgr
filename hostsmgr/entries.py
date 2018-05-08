@@ -101,10 +101,9 @@ class HostsEntry(Entry):
 
         # Don't use str's split! It will split on dot '.' (Which valid in host
         # name.
-        parts = re.split(r'\s+', value)
+        parts = re.split(r'\s+', value.rstrip())
         if len(parts) < 2:
             raise InvalidFormat()
-
         try:
             address = ipaddress.ip_address(parts[0])
         except ValueError:
